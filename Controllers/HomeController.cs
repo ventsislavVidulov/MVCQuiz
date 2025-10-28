@@ -41,7 +41,7 @@ namespace MVCQuiz.Controllers
 
             if (selectedOption != null && selectedOption.Count > 0)
             {
-                // Store both quizId and answers
+                //store quizId and answers
                 TempData["QuizId"] = quizId;
                 TempData["QuizAnswers"] = System.Text.Json.JsonSerializer.Serialize(selectedOption);
 
@@ -62,7 +62,7 @@ namespace MVCQuiz.Controllers
 
         public IActionResult QuizResult()
         {
-            // Get quizId from TempData
+            //get quizId from TempData
             if (!TempData.ContainsKey("QuizId") || !TempData.ContainsKey("QuizAnswers"))
             {
                 TempData["Error"] = "No quiz results found. Please take a quiz first.";
@@ -81,7 +81,7 @@ namespace MVCQuiz.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Calculate results
+            //calculate results
             int score = 0;
             var results = new List<QuestionResultModel>();
 

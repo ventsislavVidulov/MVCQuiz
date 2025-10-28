@@ -1,6 +1,5 @@
 using MVCQuiz.Services;
 
-
 namespace MVCQuiz
 {
     public class Program
@@ -11,7 +10,7 @@ namespace MVCQuiz
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<Services.QuizDataService>();
+            builder.Services.AddSingleton<QuizDataService>();
 
             var app = builder.Build();
 
