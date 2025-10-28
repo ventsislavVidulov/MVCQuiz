@@ -1,0 +1,67 @@
+{
+  "title": "Git Version Control Quiz",
+  "questions": [
+    {
+      "id": 1,
+      "title": "Which command is used to initialize a new Git repository?",
+      "answer": "git init",
+      "options": [ "git start", "git init", "git new", "git create" ]
+    },
+    {
+      "id": 2,
+      "title": "What does the 'git clone' command do?",
+      "answer": "Copies a remote repository to local",
+      "options": [
+        "Creates a new branch",
+        "Copies a remote repository to local",
+        "Merges branches",
+        "Deletes a repository"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Which command shows the current status of the working directory?",
+      "answer": "git status",
+      "options": [ "git status", "git log", "git show", "git info" ]
+    },
+    {
+      "id": 4,
+      "title": "What is the purpose of 'git pull'?",
+      "answer": "Fetch and merge changes from remote",
+      "options": [
+        "Push changes to remote",
+        "Fetch and merge changes from remote",
+        "Create a pull request",
+        "Delete remote branches"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Which command creates a new branch?",
+      "answer": "git branch <name>",
+      "options": [
+        "git new branch <name>",
+        "git branch <name>",
+        "git create branch <name>",
+        "git checkout -b <name>"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "What does 'git commit -m' do?",
+      "answer": "Commits changes with a message",
+      "options": [
+        "Merges branches",
+        "Commits changes with a message",
+        "Moves files",
+        "Shows commit history"
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Which command shows the commit history?",
+      "answer": "git log",
+      "options": [ "git history", "git log", "git show", "git commits" ]
+    }
+  ]
+}
