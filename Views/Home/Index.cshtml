@@ -1,8 +1,81 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<MVCQuiz.Models.QuizModel>
+@{
+    ViewData["Title"] = "Available Quizzes";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center mb-4">Available Quizzes</h1>
+            <p class="lead text-center">Choose a quiz to test your knowledge!</p>
+        </div>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="alert alert-warning text-center">
+                    <h4>No Quizzes Available</h4>
+                    <p>There are no quizzes available at the moment.</p>
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Return Home</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var quiz in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@quiz.Title</h5>
+                            <p class="card-text flex-grow-1">
+                                <small class="text-muted">
+                                    @quiz.Questions.Count question@(quiz.Questions.Count != 1 ? "s" : "")
+                                </small>
+                            </p>
+                            <div class="mt-auto">
+                                <a href="@Url.Action("Quiz", new { id = quiz.Id })"
+                                   class="btn btn-primary w-100">
+                                    Start Quiz
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h5>Want to take all quizzes?</h5>
+                        <p class="mb-0">Test your knowledge across all topics!</p>
+                        <a href="@Url.Action("Quiz")" class="btn btn-success mt-2">
+                            Take Combined Quiz (@Model.Sum(q => q.Questions.Count) questions)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
+
+<style>
+    .card {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    }
+
+    .btn {
+        transition: all 0.2s ease-in-out;
+    }
+</style>

@@ -19,57 +19,30 @@ namespace MVCQuiz.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_quizDataService.GetAllQuizzes());
         }
 
-        [HttpGet]
-        public IActionResult Quiz()
+        public IActionResult Quiz(int id)
         {
-            return View(_quizDataService.defaultQuiz);
+            var quiz = _quizDataService.GetQuizById(id);
+            if (quiz == null)
+            {
+                TempData["Error"] = $"Quiz '{id}' not found.";
+                return RedirectToAction("Index");
+            }
+            //Console.WriteLine("here");
+
+            return View(quiz);
         }
 
-        //[HttpPost]
-        //public IActionResult SubmitQuiz(string[] selectedOption)
-        //{
-        //    result = selectedOption;
-        //    Console.WriteLine("Seleced options:");
-        //    foreach (var selected in selectedOption)
-        //    {
-        //        Console.WriteLine($"Selected option: {selected}");
-        //    }
-
-        //    return result != null ? RedirectToAction("QuizResult") : RedirectToAction("Quiz");
-        //}
-
-        //[HttpPost]
-        //public IActionResult SubmitQuiz(Dictionary<int, string> selectedOption)
-        //{
-        //    if (selectedOption != null)
-        //    {
-        //        result = selectedOption;
-
-        //        Console.WriteLine("Selected options:");
-        //        foreach (var option in result)
-        //        {
-        //            Console.WriteLine($"Question {option.Key}: {option.Value}");
-        //        }
-        //    }
-
-        //    return result != null ? RedirectToAction("QuizResult") : RedirectToAction("Quiz");
-        //}
-
-        //[HttpGet]
-
-        //public IActionResult QuizResult()
-        //{
-        //    return View(result);
-        //}
-
-        [HttpPost]
-        public IActionResult SubmitQuiz(Dictionary<int, string> selectedOption)
+        public IActionResult SubmitQuiz(int quizId, Dictionary<int, string> selectedOption)
         {
+            Console.WriteLine($"Received quizId: {quizId}");
+
             if (selectedOption != null && selectedOption.Count > 0)
             {
+                // Store both quizId and answers
+                TempData["QuizId"] = quizId;
                 TempData["QuizAnswers"] = System.Text.Json.JsonSerializer.Serialize(selectedOption);
 
                 Console.WriteLine("Selected options:");
@@ -83,26 +56,34 @@ namespace MVCQuiz.Controllers
             else
             {
                 TempData["Error"] = "Please answer all questions before submitting.";
-                return RedirectToAction("Quiz");
+                return RedirectToAction("Quiz", new { id = quizId });
             }
         }
 
         public IActionResult QuizResult()
         {
-            var answersJson = TempData["QuizAnswers"] as string;
-
-            if (string.IsNullOrEmpty(answersJson))
+            // Get quizId from TempData
+            if (!TempData.ContainsKey("QuizId") || !TempData.ContainsKey("QuizAnswers"))
             {
-                TempData["Error"] = "No quiz results found. Please take the quiz first.";
-                return RedirectToAction("Quiz");
+                TempData["Error"] = "No quiz results found. Please take a quiz first.";
+                return RedirectToAction("Index");
             }
 
+            var quizId = Convert.ToInt32(TempData["QuizId"]);
+            var answersJson = TempData["QuizAnswers"] as string;
+
             var selectedOption = System.Text.Json.JsonSerializer.Deserialize<Dictionary<int, string>>(answersJson);
-            var quiz = _quizDataService.defaultQuiz;
+            var quiz = _quizDataService.GetQuizById(quizId);
 
+            if (quiz == null)
+            {
+                TempData["Error"] = "Quiz not found.";
+                return RedirectToAction("Index");
+            }
 
+            // Calculate results
             int score = 0;
-            var results = new List<QuestionResult>();
+            var results = new List<QuestionResultModel>();
 
             foreach (var answer in selectedOption)
             {
@@ -115,7 +96,7 @@ namespace MVCQuiz.Controllers
 
                     if (isCorrect) score++;
 
-                    results.Add(new QuestionResult
+                    results.Add(new QuestionResultModel
                     {
                         Question = question,
                         UserAnswer = userAnswer,
@@ -126,6 +107,8 @@ namespace MVCQuiz.Controllers
 
             var viewModel = new QuizResultViewModel
             {
+                QuizId = quizId,
+                QuizTitle = quiz.Title,
                 Score = score,
                 TotalQuestions = quiz.Questions.Count,
                 Results = results,
@@ -135,15 +118,63 @@ namespace MVCQuiz.Controllers
             return View(viewModel);
         }
 
-        [HttpGet]
+        //public IActionResult QuizResult()
+        //{
+        //    var answersJson = TempData["QuizAnswers"] as string;
 
-        public IActionResult Question()
-        {
-            var question = _quizDataService.GetRandomQuestion();
-            var remaining = _quizDataService.GetRemainingQuestionsCount();
-            Console.WriteLine(remaining);
-            return View(question);
-        }
+        //    if (string.IsNullOrEmpty(answersJson))
+        //    {
+        //        TempData["Error"] = "No quiz results found. Please take the quiz first.";
+        //        return RedirectToAction("Quiz");
+        //    }
+
+        //    var selectedOption = System.Text.Json.JsonSerializer.Deserialize<Dictionary<int, string>>(answersJson);
+        //    var quiz = _quizDataService.defaultQuiz;
+
+
+        //    int score = 0;
+        //    var results = new List<QuestionResult>();
+
+        //    foreach (var answer in selectedOption)
+        //    {
+        //        var questionIndex = answer.Key;
+        //        if (questionIndex < quiz.Questions.Count)
+        //        {
+        //            var question = quiz.Questions[questionIndex];
+        //            var userAnswer = answer.Value;
+        //            var isCorrect = userAnswer == question.Answer;
+
+        //            if (isCorrect) score++;
+
+        //            results.Add(new QuestionResult
+        //            {
+        //                Question = question,
+        //                UserAnswer = userAnswer,
+        //                IsCorrect = isCorrect
+        //            });
+        //        }
+        //    }
+
+        //    var viewModel = new QuizResultViewModel
+        //    {
+        //        Score = score,
+        //        TotalQuestions = quiz.Questions.Count,
+        //        Results = results,
+        //        Percentage = (score * 100) / quiz.Questions.Count
+        //    };
+
+        //    return View(viewModel);
+        //}
+
+        //[HttpGet]
+
+        //public IActionResult Question(QuizModel quiz)
+        //{
+        //    var question = _quizDataService.GetRandomQuestion(quiz);
+        //    var remaining = _quizDataService.GetRemainingQuestionsCount();
+        //    Console.WriteLine(remaining);
+        //    return View(question);
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

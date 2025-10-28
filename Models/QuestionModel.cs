@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-
-namespace MVCQuiz.Models
+﻿namespace MVCQuiz.Models
 {
-    public class Question
+    public class QuestionModel
     {
         public int Id { get; set; }
 
