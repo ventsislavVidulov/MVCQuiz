@@ -53,7 +53,7 @@ namespace MVCQuiz.Services
             Console.WriteLine($"Requested id {id}");
             if (id == 0)
             {
-                // Return combined quiz for ID 0
+                //returns combined quiz for ID 0
                 return GetDefaultQuiz();
             }
 
@@ -62,7 +62,7 @@ namespace MVCQuiz.Services
 
         public QuizModel GetDefaultQuiz()
         {
-            // Combine all quizzes into one
+            //combine all quizzes into one
             var combinedQuestions = new List<QuestionModel>();
             int questionId = 1;
 
