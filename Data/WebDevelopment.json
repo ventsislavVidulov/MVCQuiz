@@ -1,0 +1,68 @@
+{
+  "title": "Web Development Quiz",
+  "questions": [
+    {
+      "id": 1,
+      "title": "What does HTML stand for?",
+      "answer": "HyperText Markup Language",
+      "options": [
+        "HyperText Markup Language",
+        "HighTech Modern Language",
+        "HyperTransfer Markup Language",
+        "Home Tool Markup Language"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Which CSS property is used to change the text color?",
+      "answer": "color",
+      "options": [ "text-color", "color", "font-color", "text-style" ]
+    },
+    {
+      "id": 3,
+      "title": "What is the latest version of HTML?",
+      "answer": "HTML5",
+      "options": [ "HTML4", "HTML5", "XHTML", "HTML2023" ]
+    },
+    {
+      "id": 4,
+      "title": "Which HTTP method is used to retrieve data?",
+      "answer": "GET",
+      "options": [ "GET", "POST", "PUT", "DELETE" ]
+    },
+    {
+      "id": 5,
+      "title": "What does CSS stand for?",
+      "answer": "Cascading Style Sheets",
+      "options": [
+        "Computer Style Sheets",
+        "Cascading Style Sheets",
+        "Creative Style System",
+        "Colorful Style Sheets"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Which tag is used to create a hyperlink in HTML?",
+      "answer": "<a>",
+      "options": [ "<link>", "<a>", "<href>", "<hyperlink>" ]
+    },
+    {
+      "id": 7,
+      "title": "What is the purpose of media queries in CSS?",
+      "answer": "Responsive design for different devices",
+      "options": [
+        "Play media files",
+        "Responsive design for different devices",
+        "Query databases",
+        "Style audio and video elements"
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Which JavaScript framework is developed by Google?",
+      "answer": "Angular",
+      "options": [ "React", "Angular", "Vue", "Ember" ]
+    }
+  ]
+}
