@@ -1,0 +1,57 @@
+{
+  "title": "JavaScript Fundamentals Quiz",
+  "questions": [
+    {
+      "id": 1,
+      "title": "Which keyword is used to declare a variable in modern JavaScript?",
+      "answer": "let",
+      "options": [ "var", "let", "const", "variable" ]
+    },
+    {
+      "id": 2,
+      "title": "What will typeof null return in JavaScript?",
+      "answer": "object",
+      "options": [ "null", "object", "undefined", "string" ]
+    },
+    {
+      "id": 3,
+      "title": "Which method adds one or more elements to the end of an array?",
+      "answer": "push()",
+      "options": [ "push()", "pop()", "shift()", "unshift()" ]
+    },
+    {
+      "id": 4,
+      "title": "What does JSON stand for?",
+      "answer": "JavaScript Object Notation",
+      "options": [
+        "JavaScript Object Notation",
+        "JavaScript Online Network",
+        "Java Standard Object Notation",
+        "JavaScript Oriented Notation"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Which operator is used for strict equality comparison?",
+      "answer": "===",
+      "options": [ "==", "===", "=", "!==" ]
+    },
+    {
+      "id": 6,
+      "title": "What is the purpose of the 'this' keyword in JavaScript?",
+      "answer": "Refers to the current object",
+      "options": [
+        "Refers to the previous object",
+        "Refers to the current object",
+        "Creates a new object",
+        "Refers to the parent object"
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Which function is used to parse a string to an integer?",
+      "answer": "parseInt()",
+      "options": [ "parseInt()", "parseFloat()", "Number()", "String()" ]
+    }
+  ]
+}

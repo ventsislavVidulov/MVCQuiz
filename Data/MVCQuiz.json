@@ -1,0 +1,60 @@
+﻿{
+  "title": "MVC Frameworks Quiz",
+  "questions": [
+    {
+      "id": 1,
+      "title": "Which annotation is used to define a controller in Spring MVC?",
+      "answer": "@Controller",
+      "options": [
+        "@Component",
+        "@Controller",
+        "@RestService",
+        "@MVCController"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Which method in a controller returns a View in ASP.NET Core MVC?",
+      "answer": "View()",
+      "options": [
+        "Display()",
+        "Show()",
+        "View()",
+        "Render()"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Which method is used to define a GET route in Express?",
+      "answer": "app.get()",
+      "options": [
+        "app.route()",
+        "app.get()",
+        "express.get()",
+        "router.create()"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "In MVC architecture, what does the 'C' stand for?",
+      "answer": "Controller",
+      "options": [
+        "Code",
+        "Controller",
+        "Class",
+        "Content"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Which part of MVC is responsible for handling user input?",
+      "answer": "View",
+      "options": [
+        "Model",
+        "View",
+        "Controller",
+        "Template"
+      ]
+    }
+  ]
+}

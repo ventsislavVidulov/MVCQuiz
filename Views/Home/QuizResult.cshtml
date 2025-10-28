@@ -1,0 +1,95 @@
+﻿@model MVCQuiz.Models.QuizResultViewModel
+@{
+    ViewData["Title"] = "Quiz Results";
+}
+
+@if (Model == null)
+{
+    <div class="alert alert-danger">
+        <h4>Error: No results available</h4>
+        <p>Please complete the quiz first.</p>
+        <a href="@Url.Action("Quiz")" class="btn btn-primary">Take Quiz</a>
+    </div>
+    return;
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Quiz Completed!</h2>
+                </div>
+                <div class="card-body text-center">
+                    <h3>Your Score: @Model.Score out of @Model.TotalQuestions</h3>
+                    <div class="progress mb-3" style="height: 30px;">
+                        <div class="progress-bar @(Model.Percentage >= 70 ? "bg-success" : Model.Percentage >= 50 ? "bg-warning" : "bg-danger")"
+                             role="progressbar" style="width: @Model.Percentage%">
+                            @Model.Percentage%
+                        </div>
+                    </div>
+
+                    @if (Model.Percentage >= 70)
+                    {
+                        <div class="alert alert-success">
+                            <h4>Excellent! 🎉</h4>
+                            <p>You have a great understanding of MVC frameworks!</p>
+                        </div>
+                    }
+                    else if (Model.Percentage >= 50)
+                    {
+                        <div class="alert alert-warning">
+                            <h4>Good Job! 👍</h4>
+                            <p>You have a decent understanding, but there's room for improvement.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger">
+                            <h4>Keep Learning! 📚</h4>
+                            <p>Don't worry, keep practicing and you'll improve!</p>
+                        </div>
+                    }
+
+                    <div class="mt-4">
+                        <a href="@Url.Action("Quiz")" class="btn btn-primary">Take Quiz Again</a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Home</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Results -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h4>Detailed Results</h4>
+                </div>
+                <div class="card-body">
+                    @for (int i = 0; i < Model.Results.Count; i++)
+                    {
+                        var result = Model.Results[i];
+
+                        <div class="mb-4 p-3 border rounded @(result.IsCorrect ? "border-success bg-light" : "border-danger bg-light")">
+                            <h6>Question @(i + 1): @result.Question.Title</h6>
+                            <p>
+                                <strong>Your answer:</strong>
+                                <span class="@(result.IsCorrect ? "text-success" : "text-danger")">
+                                    @result.UserAnswer
+                                </span>
+                            </p>
+                            @if (!result.IsCorrect)
+                            {
+                                <p>
+                                    <strong>Correct answer:</strong>
+                                    <span class="text-success">@result.Question.Answer</span>
+                                </p>
+                            }
+                            <p class="mb-0 @(result.IsCorrect ? "text-success" : "text-danger")">
+                                <strong>@(result.IsCorrect ? "✓ Correct" : "✗ Incorrect")</strong>
+                            </p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
