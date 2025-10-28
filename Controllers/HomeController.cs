@@ -73,7 +73,7 @@ namespace MVCQuiz.Controllers
             var answersJson = TempData["QuizAnswers"] as string;
 
             var selectedOption = System.Text.Json.JsonSerializer.Deserialize<Dictionary<int, string>>(answersJson);
-            var quiz = _quizDataService.GetQuizById(quizId);
+            var quiz = _quizDataService.GetCurrentQuiz();
 
             if (quiz == null)
             {
@@ -117,54 +117,6 @@ namespace MVCQuiz.Controllers
 
             return View(viewModel);
         }
-
-        //public IActionResult QuizResult()
-        //{
-        //    var answersJson = TempData["QuizAnswers"] as string;
-
-        //    if (string.IsNullOrEmpty(answersJson))
-        //    {
-        //        TempData["Error"] = "No quiz results found. Please take the quiz first.";
-        //        return RedirectToAction("Quiz");
-        //    }
-
-        //    var selectedOption = System.Text.Json.JsonSerializer.Deserialize<Dictionary<int, string>>(answersJson);
-        //    var quiz = _quizDataService.defaultQuiz;
-
-
-        //    int score = 0;
-        //    var results = new List<QuestionResult>();
-
-        //    foreach (var answer in selectedOption)
-        //    {
-        //        var questionIndex = answer.Key;
-        //        if (questionIndex < quiz.Questions.Count)
-        //        {
-        //            var question = quiz.Questions[questionIndex];
-        //            var userAnswer = answer.Value;
-        //            var isCorrect = userAnswer == question.Answer;
-
-        //            if (isCorrect) score++;
-
-        //            results.Add(new QuestionResult
-        //            {
-        //                Question = question,
-        //                UserAnswer = userAnswer,
-        //                IsCorrect = isCorrect
-        //            });
-        //        }
-        //    }
-
-        //    var viewModel = new QuizResultViewModel
-        //    {
-        //        Score = score,
-        //        TotalQuestions = quiz.Questions.Count,
-        //        Results = results,
-        //        Percentage = (score * 100) / quiz.Questions.Count
-        //    };
-
-        //    return View(viewModel);
-        //}
 
         //[HttpGet]
 

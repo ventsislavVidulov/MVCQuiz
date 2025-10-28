@@ -12,6 +12,7 @@ namespace MVCQuiz.Services
         private static readonly Random random = new Random();
         private List<QuizModel> _quizzes = new();
         private QuizModel _deserializedQuiz = JsonConvert.DeserializeObject<QuizModel>(File.ReadAllText(_quizDataFile));
+        private QuizModel _currentQuiz;
 
         public QuizModel defaultQuiz;
 
@@ -36,11 +37,11 @@ namespace MVCQuiz.Services
                 _quizzes.Add(currentQuiz);
 
             }
-                Console.WriteLine("All loaded quiz IDs:");
-                foreach (var quiz in _quizzes)
-                {
-                    Console.WriteLine($" - Quiz ID: {quiz.Id}, Title: {quiz.Title}");
-                }
+            Console.WriteLine("All loaded quiz IDs:");
+            foreach (var quiz in _quizzes)
+            {
+                Console.WriteLine($" - Quiz ID: {quiz.Id}, Title: {quiz.Title}");
+            }
         }
 
         public List<QuizModel> GetAllQuizzes()
@@ -57,7 +58,31 @@ namespace MVCQuiz.Services
                 return GetDefaultQuiz();
             }
 
-            return _quizzes.FirstOrDefault(q => q.Id == id);
+            QuizModel? quiz = _quizzes.FirstOrDefault(q => q.Id == id);
+            if (quiz == null)
+            {
+                Console.WriteLine($"Quiz with ID {id} not found.");
+            }
+
+            RandomizeOptions(quiz);
+            RandomizeQuestion(quiz);
+            _currentQuiz = quiz;
+            return quiz;
+        }
+
+        public QuizModel GetCurrentQuiz()
+        {
+            if (_currentQuiz != null)
+            {
+                QuizModel quiz = _currentQuiz;
+                _currentQuiz = null;
+                return quiz;
+            } 
+            else
+            {
+                Console.WriteLine("There is no quiz started");
+            }
+            return null;
         }
 
         public QuizModel GetDefaultQuiz()
@@ -85,20 +110,35 @@ namespace MVCQuiz.Services
             return megaQuiz;
         }
 
+        public void RandomizeQuestion(QuizModel quiz)
+        {
+            List<QuestionModel> listCopy = new List<QuestionModel>(quiz.Questions);
 
-        //public void RandomizeQuestion(Quiz quiz)
-        //{
-        //    List<Question> listCopy = new List<Question>(quiz.Questions);
+            for (int i = 0; i < 4; i++)
+            {
+                int j = random.Next(i, listCopy.Count);
 
-        //    for (int i = 0; i < 4; i++)
-        //    {
-        //        int j = random.Next(i, listCopy.Count);
+                (listCopy[i], listCopy[j]) = (listCopy[j], listCopy[i]);
+            }
 
-        //        (listCopy[i], listCopy[j]) = (listCopy[j], listCopy[i]);
-        //    }
+            quiz.Questions = listCopy.ToList();
+        }
 
-        //    randomizedQuestions = listCopy.Take(4).ToList();
-        //}
+        public void RandomizeOptions(QuizModel quiz)
+        {
+            foreach (var question in quiz.Questions)
+            {
+                var options = question.Options.ToList();
+
+                for (int i = 0; i < options.Count; i++)
+                {
+                    int j = random.Next(i, options.Count);
+                    (options[i], options[j]) = (options[j], options[i]);
+                }
+
+                question.Options = options.ToArray();
+            }
+        }
 
         //public Question GetRandomQuestion(Quiz quiz)
         //{

@@ -52,7 +52,7 @@
                     }
 
                     <div class="mt-4">
-                        <a href="@Url.Action("Quiz")" class="btn btn-primary">Take Quiz Again</a>
+                        <a href="@Url.Action("Quiz", new{id = Model.QuizId})" class="btn btn-primary">Take Quiz Again</a>
                         <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Home</a>
                     </div>
                 </div>
