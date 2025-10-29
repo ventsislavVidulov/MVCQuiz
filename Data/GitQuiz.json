@@ -2,6 +2,12 @@
   "title": "Git Version Control Quiz",
   "questions": [
     {
+      "id": 0,
+      "title": "Which command shows the commit history?",
+      "answer": "git log",
+      "options": [ "git history", "git log", "git show", "git commits" ]
+    },
+    {
       "id": 1,
       "title": "Which command is used to initialize a new Git repository?",
       "answer": "git init",
@@ -56,12 +62,6 @@
         "Moves files",
         "Shows commit history"
       ]
-    },
-    {
-      "id": 7,
-      "title": "Which command shows the commit history?",
-      "answer": "git log",
-      "options": [ "git history", "git log", "git show", "git commits" ]
     }
   ]
 }

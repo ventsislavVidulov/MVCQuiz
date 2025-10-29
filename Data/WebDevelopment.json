@@ -2,6 +2,12 @@
   "title": "Web Development Quiz",
   "questions": [
     {
+      "id": 0,
+      "title": "Which JavaScript framework is developed by Google?",
+      "answer": "Angular",
+      "options": [ "React", "Angular", "Vue", "Ember" ]
+    },
+    {
       "id": 1,
       "title": "What does HTML stand for?",
       "answer": "HyperText Markup Language",
@@ -57,12 +63,6 @@
         "Query databases",
         "Style audio and video elements"
       ]
-    },
-    {
-      "id": 8,
-      "title": "Which JavaScript framework is developed by Google?",
-      "answer": "Angular",
-      "options": [ "React", "Angular", "Vue", "Ember" ]
     }
   ]
 }

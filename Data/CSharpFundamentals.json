@@ -2,6 +2,17 @@
   "title": "C# Programming Quiz",
   "questions": [
     {
+      "id": 0,
+      "title": "What is the purpose of the 'using' statement in C#?",
+      "answer": "Automatic resource disposal",
+      "options": [
+        "Import namespaces",
+        "Automatic resource disposal",
+        "Define variables",
+        "Create objects"
+      ]
+    },
+    {
       "id": 1,
       "title": "Which keyword is used to define a class in C#?",
       "answer": "class",
@@ -35,17 +46,6 @@
       "title": "Which method is the entry point of a C# console application?",
       "answer": "Main",
       "options": [ "Start", "Main", "Run", "Initialize" ]
-    },
-    {
-      "id": 6,
-      "title": "What is the purpose of the 'using' statement in C#?",
-      "answer": "Automatic resource disposal",
-      "options": [
-        "Import namespaces",
-        "Automatic resource disposal",
-        "Define variables",
-        "Create objects"
-      ]
     }
   ]
 }
