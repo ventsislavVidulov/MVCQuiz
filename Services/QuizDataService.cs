@@ -9,17 +9,17 @@ namespace MVCQuiz.Services
         //private List<Question> randomizedQuestions;
         //private static readonly string _quizDataFile = "Data/MVCQuiz.json";
         //private QuizModel _deserializedQuiz = JsonConvert.DeserializeObject<QuizModel>(File.ReadAllText(_quizDataFile));
+        //private QuizModel? _currentQuiz;
         private readonly IHostEnvironment _environment;
         private static readonly Random random = new Random();
         private List<QuizModel> _quizzes = new();
-        private QuizModel _currentQuiz;
 
         //public QuizModel defaultQuiz;
 
         public QuizDataService(IHostEnvironment environment)
         {
-            _environment = environment;
             //defaultQuiz = _deserializedQuiz;
+            _environment = environment;
             ReadAllJsonFiles();
         }
         private void ReadAllJsonFiles()
@@ -66,24 +66,25 @@ namespace MVCQuiz.Services
 
             RandomizeOptions(quiz);
             RandomizeQuestion(quiz);
-            _currentQuiz = quiz;
+            //_currentQuiz = quiz;
             return quiz;
         }
 
-        public QuizModel GetCurrentQuiz()
-        {
-            if (_currentQuiz != null)
-            {
-                QuizModel quiz = _currentQuiz;
-                _currentQuiz = null;
-                return quiz;
-            } 
-            else
-            {
-                Console.WriteLine("There is no quiz started");
-            }
-            return null;
-        }
+        //not working if two users start different quizzes
+        //public QuizModel GetCurrentQuiz()
+        //{
+        //    if (_currentQuiz != null)
+        //    {
+        //        QuizModel quiz = _currentQuiz;
+        //        _currentQuiz = null;
+        //        return quiz;
+        //    } 
+        //    else
+        //    {
+        //        Console.WriteLine("There is no quiz started");
+        //    }
+        //    return null;
+        //}
 
         public QuizModel GetDefaultQuiz()
         {

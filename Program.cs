@@ -10,7 +10,7 @@ namespace MVCQuiz
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<QuizDataService>();
+            builder.Services.AddTransient<QuizDataService>();
 
             var app = builder.Build();
 

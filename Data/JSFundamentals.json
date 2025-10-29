@@ -2,6 +2,12 @@
   "title": "JavaScript Fundamentals Quiz",
   "questions": [
     {
+      "id": 0,
+      "title": "Which function is used to parse a string to an integer?",
+      "answer": "parseInt()",
+      "options": [ "parseInt()", "parseFloat()", "Number()", "String()" ]
+    },
+    {
       "id": 1,
       "title": "Which keyword is used to declare a variable in modern JavaScript?",
       "answer": "let",
@@ -46,12 +52,6 @@
         "Creates a new object",
         "Refers to the parent object"
       ]
-    },
-    {
-      "id": 7,
-      "title": "Which function is used to parse a string to an integer?",
-      "answer": "parseInt()",
-      "options": [ "parseInt()", "parseFloat()", "Number()", "String()" ]
     }
   ]
 }

@@ -73,7 +73,7 @@ namespace MVCQuiz.Controllers
             var answersJson = TempData["QuizAnswers"] as string;
 
             var selectedOption = System.Text.Json.JsonSerializer.Deserialize<Dictionary<int, string>>(answersJson);
-            var quiz = _quizDataService.GetCurrentQuiz();
+            var quiz = _quizDataService.GetQuizById(quizId);
 
             if (quiz == null)
             {
@@ -90,7 +90,7 @@ namespace MVCQuiz.Controllers
                 var questionIndex = answer.Key;
                 if (questionIndex < quiz.Questions.Count)
                 {
-                    var question = quiz.Questions[questionIndex];
+                    var question = quiz.Questions.FirstOrDefault(q => q.Id == questionIndex);
                     var userAnswer = answer.Value;
                     var isCorrect = userAnswer == question.Answer;
 
