@@ -70,7 +70,7 @@ namespace MVCQuiz.Services
             return quiz;
         }
 
-        //not working if two users start different quizzes
+        //not working if more users start quizzes
         //public QuizModel GetCurrentQuiz()
         //{
         //    if (_currentQuiz != null)
@@ -90,7 +90,7 @@ namespace MVCQuiz.Services
         {
             //combine all quizzes into one
             var combinedQuestions = new List<QuestionModel>();
-            int questionId = 1;
+            int questionId = 0;
 
             foreach (var quiz in _quizzes)
             {
