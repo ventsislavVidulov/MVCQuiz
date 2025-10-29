@@ -7,19 +7,19 @@ namespace MVCQuiz.Services
     public class QuizDataService
     {
         //private List<Question> randomizedQuestions;
+        //private static readonly string _quizDataFile = "Data/MVCQuiz.json";
+        //private QuizModel _deserializedQuiz = JsonConvert.DeserializeObject<QuizModel>(File.ReadAllText(_quizDataFile));
         private readonly IHostEnvironment _environment;
-        private static readonly string _quizDataFile = "Data/MVCQuiz.json";
         private static readonly Random random = new Random();
         private List<QuizModel> _quizzes = new();
-        private QuizModel _deserializedQuiz = JsonConvert.DeserializeObject<QuizModel>(File.ReadAllText(_quizDataFile));
         private QuizModel _currentQuiz;
 
-        public QuizModel defaultQuiz;
+        //public QuizModel defaultQuiz;
 
         public QuizDataService(IHostEnvironment environment)
         {
             _environment = environment;
-            defaultQuiz = _deserializedQuiz;
+            //defaultQuiz = _deserializedQuiz;
             ReadAllJsonFiles();
         }
         private void ReadAllJsonFiles()
