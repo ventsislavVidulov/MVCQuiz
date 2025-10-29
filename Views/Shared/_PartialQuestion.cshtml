@@ -12,9 +12,17 @@
             <input type="radio"
                    name="selectedOption[@questionIndex]"
                    value="@option"
-                   id="q@(questionIndex)_@(option)"
-                   required>
+                   id="q@(questionIndex)_@(option)">
             <label for="q@(questionIndex)_@(option)">@option</label>
         </div>
     }
+
+    <div hidden>
+        <input type="radio"
+               name="selectedOption[@questionIndex]"
+               value="Not answered"
+               id="q@(questionIndex)_Not answered"
+               checked>
+        <label for="q@(questionIndex)_Not answered">Not answered</label>
+    </div>
 </div>

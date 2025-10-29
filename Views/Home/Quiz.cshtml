@@ -4,15 +4,43 @@
     ViewData["Title"] = "Quiz";
 }
 
+<h1 id="timer">Time left: (30 seconds per question)</h1>
 <h1>@Model.Title</h1>
 <form method="post" asp-action="SubmitQuiz">
-    <input type="hidden" name="quizId" value="@Model.Id" />  
+    <input type="hidden" name="quizId" value="@Model.Id" />
 
-     @foreach (QuestionModel question in Model.Questions)
+    @foreach (QuestionModel question in Model.Questions)
     {
         <partial name="_PartialQuestion" model="Model.Questions.FirstOrDefault(q => q.Id == question.Id)"
-            view-data="@(new ViewDataDictionary(ViewData) { { "QuestionIndex", question.Id } })" />
+                 view-data="@(new ViewDataDictionary(ViewData) { { "QuestionIndex", question.Id } })" />
     }
 
-    <button type="submit" class="btn-primary">Submit Quiz</button>
+    <button type="submit" id="submit" class="btn-primary">Submit Quiz</button>
 </form>
+
+<script>
+    const timerElement = document.getElementById("timer");
+    timerElement.style.padding = "20px 0";
+    timerElement.style.position = "sticky";
+    timerElement.style.top = "0px";
+    timerElement.style.backgroundColor = "white";
+    const submitButtonElement = document.getElementById("submit");
+    let quizTimeSeconds = @Model.Questions.Count * 30;
+
+    const quizIntervalId = setInterval(() => {
+        const minutes = Math.floor(quizTimeSeconds / 60);
+        const seconds = quizTimeSeconds % 60;
+        timerElement.textContent = seconds < 10
+            ? `Time left : ${minutes}:0${seconds}`
+            : `Time left : ${minutes}:${seconds}`;
+        if (quizTimeSeconds < 60) {
+            timerElement.style.color = "red";
+        }
+        quizTimeSeconds--;
+    }, 1000);
+
+    setTimeout(() => {
+        clearInterval(quizIntervalId);
+        submitButtonElement.click();
+    }, quizTimeSeconds * 1000);
+</script>
